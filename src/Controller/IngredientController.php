@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IngredientController extends AbstractController
 
  /**
-  * This function display all ingrédients
+  * This controller display all ingrédients
   * @param IngredientRepository $repository
   * @param PaginatorInterface $paginator
   * @param Request $request
@@ -41,7 +41,13 @@ class IngredientController extends AbstractController
         ]);
 
     }
-
+        /**
+         * This controller create new ingrédient
+        * @param IngredientRepository $repository
+        *@param EntityManagerInterface $manager
+        * @param Request $request
+        * @return Response
+        */
      #[Route('/ingredient/nouveau', 'ingredient.new', methods:['GET', 'POST'])]
     public function new (Request $request, EntityManagerInterface $manager) : Response 
 
@@ -55,7 +61,7 @@ class IngredientController extends AbstractController
 
         $manager->persist($ingredient);
         $manager->flush();
-    
+     
         $this->addFlash(
             'success',
             ' Votre ingrédient a été bien crée avec succès'
@@ -70,7 +76,13 @@ class IngredientController extends AbstractController
         ]);
 
     }
-
+        /**
+        * This controller edit ingrédient
+        * @param IngredientRepository $repository
+        *@param EntityManagerInterface $manager
+        * @param Request $request
+        * @return Response
+        */
      #[Route('/ingredient/edition/{id}', 'ingredient.edit', methods:['GET', 'POST'])]
     public function edit(Ingredient  $ingredient, Request $request, EntityManagerInterface $manager ) : Response
     {
