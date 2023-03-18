@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\EntityListeners;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -44,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[Assert\NotBlank()]
-    private ?string $password;
+    private ?string $password = 'password';
 
     #[ORM\Column]
     #[Assert\NotNull()]
@@ -133,7 +134,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPlainPassword(string $plainPassword)
     {
-        $this->password = $plainPassword;
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }

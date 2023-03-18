@@ -12,7 +12,7 @@ class UserListener
     public function __construct(UserPasswordHasherInterface $hasher)
     
     {
-        $this->hasher=$hasher;
+        $this->hasher = $hasher;
     }
 
     public function prePersist(User $user)
@@ -37,12 +37,13 @@ class UserListener
             return;
         }
 
-        $user ->setPassword(
+        $user->setPassword(
             $this->hasher->hashPassword(
                 $user,
-                $user ->getPlainPassword()
+                $user->getPlainPassword()
             )
         );
+        
         //$user->setPlainPassword(null);
     }
 

@@ -13,6 +13,9 @@ use Faker\Generator;
 class AppFixtures extends Fixture
 {
     private Generator $faker;
+  
+    
+
     public function __construct()
     {
         $this->faker = Factory::create('fr_FR');
@@ -57,7 +60,8 @@ class AppFixtures extends Fixture
                   ->setPseudo(mt_rand(0, 1) === 1 ? $this->faker->firstName(): null)
                   ->setEmail($this->faker->email())
                   ->setRoles(['ROLE_USER'])
-                  ->setPlainPassword('password');
+                 ->setPlainPassword('password');
+
 
             $manager->persist($user);    
 
