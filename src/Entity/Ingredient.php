@@ -30,10 +30,13 @@ class Ingredient
     #[ORM\Column]
     #[Assert\NotNull()] 
     private ?\DateTimeImmutable $createdAt;
-   
-    /*
-    *construtor
-    */
+
+    #[ORM\ManyToOne(inversedBy: 'ingredients')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    
+
 
     public function __construct()
     {
@@ -86,4 +89,17 @@ class Ingredient
     {
         return $this->name;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }

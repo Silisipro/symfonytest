@@ -20,10 +20,22 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class RecipeType extends AbstractType
 {
+
+private $token;
+public function __construct( TokenStorageInterface  $token)
+{
+    $this->token = $token;
+}
+
+
+
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -135,7 +147,9 @@ class RecipeType extends AbstractType
                 'class'=>Ingredient::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('i')
-                        ->orderBy('i.name', 'ASC');
+                         ->where('i.user = :user')
+                        ->orderBy('i.name', 'ASC')
+                        ->setParameter('user', $this->token->getToken()->getuser());
                          },
                 'choice_label' => 'name',
                 'multiple' => true,
