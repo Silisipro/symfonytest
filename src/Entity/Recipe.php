@@ -73,8 +73,11 @@ class Recipe
     #[ORM\ManyToMany(targetEntity: Ingredient::class)]
     private Collection $ingredients;
 
-   
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Mark::class, orphanRemoval: true)]
+    private Collection $marks;
 
+   
+    private ?float $average = null;
     
 
     public function __construct()
@@ -82,6 +85,7 @@ class Recipe
         $this->createdAt = new \DateTimeImmutable;
         $this->updatedAt = new \DateTimeImmutable;
         $this->ingredients = new ArrayCollection();
+        $this->marks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -257,7 +261,53 @@ class Recipe
         return $this;
     }
 
-   
+    /**
+     * @return Collection<int, Mark>
+     */
+    public function getMarks(): Collection
+    {
+        return $this->marks;
+    }
+
+    public function addMark(Mark $mark): self
+    {
+        if (!$this->marks->contains($mark)) {
+            $this->marks->add($mark);
+            $mark->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMark(Mark $mark): self
+    {
+        if ($this->marks->removeElement($mark)) {
+            // set the owning side to null (unless already changed)
+            if ($mark->getRecipe() === $this) {
+                $mark->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAverage(): ?float
+    {
+        $marks = $this->marks;
+        
+        if ( $marks->toArray() ===[]){
+            $this->average = null;
+            return $this->average;
+        }
+        $total= 0;
+        foreach ($marks as $mark){
+            $total += $mark->getMark();
+        }
+            
+        $this->average = $total/ count($marks);
+
+        return $this->average;
+    }
 
 
 }
