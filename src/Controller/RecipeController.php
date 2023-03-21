@@ -40,7 +40,44 @@ class RecipeController extends AbstractController
             'recipes' => $recipes
         ]);
     }
+    #[Route('/recette/publique', name: 'recipe.index.public', methods: ['GET'])]
+    public function indexPublic(RecipeRepository $repository, PaginatorInterface $paginator, Request $request ): Response
+    {
 
+        $recipes = $paginator->paginate(
+            $repository->findPublicRecipe(null),
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return $this->render('pages/recipe/index_public.html.twig',[
+            'recipes' => $recipes
+            
+        ]);
+    }
+
+
+
+
+
+    /**
+    * This controller create new recipe
+    * @param IngredientRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
+
+    #[Security("is_granted('ROLE_USER') and recipe.isIsPublic() ===true")]
+    #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET'])]
+    public function show(Recipe $recipe): Response
+    {
+        return $this->render('pages/recipe/show.html.twig',[
+            'recipe' => $recipe
+            
+        ]);
+    }
+ 
     /**
     * This controller create new recipe
     * @param IngredientRepository $repository
@@ -111,6 +148,13 @@ class RecipeController extends AbstractController
             ]);
             
         }
+        /**
+    * This controller create new recipe
+    * @param IngredientRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
 
         #[Route('/recipe/supression/{id}', 'recipe.delete', methods:['GET'])]
     public function delete(Recipe  $recipe, Request $request, EntityManagerInterface $manager ) : Response

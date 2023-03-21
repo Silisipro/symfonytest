@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sylove - Mes Recettes{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5 ">
+        {% if not recipes.items is same as {} %}
+
+         <h1 class ="d-flex justify-content-center mt-5">Reccettes de la conmunauté  </h1>
+ 
+        <div class= >
+        <div class="d-flex justify-content-center flex-wrap"> 
+            {% for recipe in recipes %}
+            <div class="card border-primary mb-3 mr-3">
+                <div class="card-header" style="max-width:20rem;">
+                    <div class="card-header">
+                           <h5 class="card-title"> Recette n° {{recipe.id}} </h5>
+                         <hr>    
+                        <div class="card-body">
+                            <h4 class="card-title"> {{recipe.name}} </h4>
+                            <p class="card-text">{{recipe.description|slice(0, 100)}}... </p>
+                        </div>      
+                    </div>      
+                </div>    
+            </div>    
+            {% endfor %}
+        </div>
+    </div>
+              
+            
+            <div class="navigation d-flex justify-content-center mt-4">
+               {{knp_pagination_render(recipes) }}
+            </div>  
+        {% else %} 
+            <h4> Il y a pas de recettes </h4>      
+        {% endif %}
+
+    </div>
+
+{% endblock %}

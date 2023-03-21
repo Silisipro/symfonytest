@@ -13,6 +13,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    /**
+    * This controller create new recipe
+    * @param IngredientRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
+
     #[Route('/connexion', name: 'app_security', methods:['GET','POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {   
@@ -30,6 +38,14 @@ class SecurityController extends AbstractController
     {
              //vide
     }
+
+    /**
+    * This controller create new recipe
+    * @param IngredientRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
     #[Route('/inscription', name: 'security.registration', methods:['GET','POST'])] 
     public function registration(Request $request, EntityManagerInterface $manager) : Response
     {

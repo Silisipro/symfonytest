@@ -17,6 +17,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
+    /**
+    * This controller create new recipe
+    * @param IngredientRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
+
     #[Security("is_granted('ROLE_USER') and user===choosenUser")]
     #[Route('/utilisateur/edition/{id}', name: 'app_user', methods:['GET','POST']) ]
     public function edit(User $choosenUser,Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher ): Response
@@ -58,6 +66,15 @@ class UserController extends AbstractController
             'form' =>$form->createView(),
         ]);
     }
+
+    /**
+    * This controller create new recipe
+    * @param IngredientRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
+    
     #[Security("is_granted('ROLE_USER') and user===choosenUser")]
     #[Route('/utilisateur/edition-mot-de-passe/{id}', name: 'app_user_edit_password', methods:['GET','POST']) ]
     public function editPassword(User $choosenUser, Request $request,EntityManagerInterface $manager, UserPasswordHasherInterface $hasher) : Response

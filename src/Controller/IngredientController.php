@@ -19,15 +19,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IngredientController extends AbstractController
 
- /**
+ 
+
+{
+    /**
   * This controller display all ingrédients
   * @param IngredientRepository $repository
   * @param PaginatorInterface $paginator
   * @param Request $request
   * @return Response
   */
-
-{
     #[Route('/ingredient', name: 'app_ingredient', methods:['GET'] )]
     #[IsGranted('ROLE_USER')]
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request ): Response
@@ -115,7 +116,13 @@ class IngredientController extends AbstractController
         ]);
         
     }
-
+/**
+    * This controller create new recipe
+    * @param IngredientRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
     #[Route('/ingredient/supression/{id}', 'ingredient.delete', methods:['GET'])]
     public function delete(Ingredient  $ingredient, Request $request, EntityManagerInterface $manager ) : Response
     { 
