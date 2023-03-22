@@ -8,10 +8,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
 
 #[UniqueEntity('name')]
 
@@ -26,6 +31,13 @@ class Recipe
     #[Assert\NotBlank()]
     #[Assert\Length(min:2, max: 50)]
     private ?string $name;
+
+    #[Vich\UploadableField(mapping: "recipe_images", fileNameProperty: "imageName",) ]
+
+    private ?File $imageFile = null;
+
+    #[ORM\Column (nullable: true)]
+    private ?string $imageName = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()]
@@ -56,7 +68,7 @@ class Recipe
     private ?bool $isFavorite;
 
     #[ORM\Column]
-    private ?bool $isPublic;
+    private ?bool $isPublic = false;
 
     #[ORM\Column]
     #[Assert\NotNull()] 
@@ -92,7 +104,6 @@ class Recipe
     {
         return $this->id;
     }
-    #[ORM\PrePersist]
 
     public function setUpdatedAtValue()
     {
@@ -112,6 +123,43 @@ class Recipe
 
         return $this;
     }
+    public function setImageFile(File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ( null !== $imageFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+
+    }
+
+    public function getImageFile(): ? File
+    {
+        return $this->imageFile;
+    }
+
+
+
+    public function setImageName(?string $imageName):void
+    {
+        $this->imageName = $imageName;
+
+       
+    }
+
+    public function getImageName() : ? string
+    {
+        return $this->imageName;
+    } 
+
+
+
+
 
     public function getTime(): ?int
     {

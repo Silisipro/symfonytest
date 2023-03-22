@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use App\Repository\RecipeRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -68,7 +67,7 @@ class RecipeController extends AbstractController
     * @return Response
     */
 
-    #[Security("is_granted('ROLE_USER') and recipe.isIsPublic() ===true and user===recipe.getUser()")]
+    #[Security("is_granted('ROLE_USER') and recipe.isIsPublic() ===true || user===recipe.getUser()")]
     #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET', 'POST'])]
     public function show (Recipe $recipe, Request $request, EntityManagerInterface $manager, MarkRepository $markRepository): Response
     
@@ -81,6 +80,7 @@ class RecipeController extends AbstractController
                               ->setRecipe($recipe);
                         
                         $existingMark = $markRepository->findOneBy([
+
                             'user' => $this->getUser(),
                             'recipe' => $recipe
                         ]);      
@@ -120,7 +120,7 @@ class RecipeController extends AbstractController
     * @param Request $request
     * @return Response
     */
-     #[Route('/recette/creation', 'recipe.new', methods: ['GET', 'POST'])]
+     #[Route('/recette/creation', name: 'recipe.new', methods: ['GET', 'POST'])]
      #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $manager ): Response
     {

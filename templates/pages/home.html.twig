@@ -10,7 +10,17 @@
         <p class="lead">L'amour est beau , l'amour est fort. Sylove vous propose des personnes fan d'amour pour vous. </p>
         <hr class="my-4">
         <p>Pour commencer merci de vous inscrire afin de profiter les avantages qu'offrent Sylove.</p>
+
+        {% if app.user %}
+            <a class="btn btn-primary btn-lg" href="{{path('recipe.index.public')}}" role="button">Recettes publiques</a>
+        <a class="btn btn-primary btn-lg" href="{{path('ingredient.new')}}" role="button">Créer un ingredient</a>
+        <a class="btn btn-primary btn-lg" href="{{path('recipe.new')}}" role="button">Créer une recette</a>
+        
+        {% else %}
         <a class="btn btn-primary btn-lg" href="{{path('security.registration')}}" role="button">Inscription</a>
+
+        {% endif %}
+        
     </div>
     
     <div class= >
@@ -25,6 +35,7 @@
                         <div class="card-body">
                             <h4 class="card-title"> {{recipe.name}} </h4>
                             <p class="card-text">{{recipe.description|slice(0, 100)}}... </p>
+                            <a class="card-link" href="#">Voir plus</a>
                         </div>      
                     </div>      
                 </div>    

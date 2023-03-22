@@ -12,10 +12,15 @@
                   {{message}}
                  </div> 
          {% endfor %}
+        {#
+        <div class=" recipe_image"> 
+          <img style"max-width: 500px" src="{{ vich_uploader_asset(recipe, 'imageFile')}}">
+        </div> 
+          {# affiche tout le formulaire d'un coup 
+                   {{ form(form) }}   #}
        <p> <span class= " badge bg-secondary">La moyenne de cette recette est de {{recipe.average|number_format(2, ',', '.') }}/5 </span></p>
 
-         {# affiche tout le formulaire d'un coup 
-                   {{ form(form) }}   #}
+         
        <p> <span class= " badge bg-primary">Créée le {{recipe.createdAt|date('d/m/Y') }} </span> par {{app.user.fullName}}</p>
          
          {% if recipe.time  %}

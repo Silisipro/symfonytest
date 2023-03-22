@@ -14,11 +14,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\VichimageType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,9 +31,6 @@ public function __construct( TokenStorageInterface  $token)
 {
     $this->token = $token;
 }
-
-
-
 
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -143,6 +140,37 @@ public function __construct( TokenStorageInterface  $token)
                     new Assert\NotNull(), 
                     ]    
             ] )
+           // ->add('imageFile', VichimageType::class,  [
+                
+           //     'label'=> 'Image de la recette',
+            //    'label_attr'=>[
+            //        'class' =>'form-label mt-4'
+             //          ],
+           // ] )
+            ->add('imageFile', FileType::class, [
+                'label' => "Sélectionner vos images",
+                'mapped' => false,
+                'required' => false,
+                'multiple' => true,
+//               'constraints' => [
+//                    new File([
+//                        'maxSize' => '5120k', // 5 Mo
+//                        'mimeTypes' => [
+//                            'image/gif',
+//                            'image/jpeg',
+//                            'image/png',
+//                            'image/svg+xml',
+//                        ],
+//                        'mimeTypesMessage' => "Veuillez choisir des images dont chacune d'elle a une taille maximale de 5 Mo",
+//                    ])
+//                ],
+                'attr' => [
+                    'class' => "form-control",
+                    'label' => "Déposez vos fichiers ici",
+                    'help' => "Ou cliquez pour les téléverser",
+                    'is' => "drop-files",
+                ],
+            ])
             ->add('ingredients', EntityType::class, [
                 'class'=>Ingredient::class,
                 'query_builder' => function (EntityRepository $er) {
