@@ -13,11 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
-
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
-
 #[UniqueEntity('name')]
 
 class Recipe
@@ -111,7 +109,6 @@ class Recipe
         
     }
 
-
     public function getName(): ?string
     {
         return $this->name;
@@ -134,8 +131,6 @@ class Recipe
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTimeImmutable();
         }
-
-
     }
 
     public function getImageFile(): ? File
@@ -143,23 +138,16 @@ class Recipe
         return $this->imageFile;
     }
 
-
-
     public function setImageName(?string $imageName):void
     {
         $this->imageName = $imageName;
-
-       
+  
     }
 
     public function getImageName() : ? string
     {
         return $this->imageName;
     } 
-
-
-
-
 
     public function getTime(): ?int
     {

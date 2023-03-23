@@ -60,8 +60,8 @@ class RecipeController extends AbstractController
     }
 
     /**
-    * This controller create new recipe
-    * @param IngredientRepository $repository
+    * This controller show recipe  
+    * @param MarkRepository $repository
     *@param EntityManagerInterface $manager
     * @param Request $request
     * @return Response
@@ -89,22 +89,15 @@ class RecipeController extends AbstractController
                        }else{
                         $existingMark-> setMark(
                             $form ->getData()->getMark()
-
                         );
                        }
-
-
                        $manager ->flush();
- 
                     $this->addFlash(
                         'success',
                         ' Votre note a été bien prise en compte'
                     );
-
                     return $this->redirectToRoute('recipe.show', ['id'=>$recipe->getId()]);
                 }
-                
-
         return $this->render('pages/recipe/show.html.twig',[
             'recipe' => $recipe,
             'form'=>$form->createView()
@@ -115,7 +108,6 @@ class RecipeController extends AbstractController
  
     /**
     * This controller create new recipe
-    * @param IngredientRepository $repository
     *@param EntityManagerInterface $manager
     * @param Request $request
     * @return Response
@@ -184,8 +176,8 @@ class RecipeController extends AbstractController
             
     }
         /**
-    * This controller create new recipe
-    * @param IngredientRepository $repository
+    * This controller delete recipe
+    * @param Recipe $recipe
     *@param EntityManagerInterface $manager
     * @param Request $request
     * @return Response
@@ -204,6 +196,7 @@ class RecipeController extends AbstractController
 
         return $this->redirectToRoute('app_recipe');   
     }  
+
 
 
 

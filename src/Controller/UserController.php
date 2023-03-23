@@ -18,8 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends AbstractController
 {
     /**
-    * This controller create new recipe
-    * @param IngredientRepository $repository
+    * This controller edit user information
+    *@param  User $choosenUser
+    * @param UserPasswordHasherInterface $hasher
     *@param EntityManagerInterface $manager
     * @param Request $request
     * @return Response
@@ -68,8 +69,9 @@ class UserController extends AbstractController
     }
 
     /**
-    * This controller create new recipe
-    * @param IngredientRepository $repository
+    * This controller edit password user
+    *@param  User $choosenUser
+    * @param UserPasswordHasherInterface $hasher
     *@param EntityManagerInterface $manager
     * @param Request $request
     * @return Response

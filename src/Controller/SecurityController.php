@@ -3,7 +3,6 @@
 namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +13,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-    * This controller create new recipe
-    * @param IngredientRepository $repository
-    *@param EntityManagerInterface $manager
-    * @param Request $request
+    * This controller allow  connexion
+    * @param AuthenticationUtils $authenticationUtils
     * @return Response
     */
 
@@ -40,8 +37,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-    * This controller create new recipe
-    * @param IngredientRepository $repository
+    * This controller allow registration
     *@param EntityManagerInterface $manager
     * @param Request $request
     * @return Response

@@ -5,10 +5,7 @@ namespace App\Controller;
 use App\Entity\Ingredient;
 use App\Form\IngredientType;
 use App\Repository\IngredientRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
-
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -18,9 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IngredientController extends AbstractController
-
- 
-
 {
     /**
   * This controller display all ingrédients
@@ -33,21 +27,19 @@ class IngredientController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request ): Response
     {
-        $ingredients = $paginator->paginate(
-            $repository->findBy(['user'=> $this->getUser()]),
-            $request->query->getInt('page', 1),
-            10
-        );
-        
-        
-        return $this->render('pages/ingredient/index.html.twig', [
-              'ingredients' =>$ingredients
+            $ingredients = $paginator->paginate(
+                $repository->findBy(['user'=> $this->getUser()]),
+                $request->query->getInt('page', 1),
+                10
+            );
+
+            return $this->render('pages/ingredient/index.html.twig', [
+                'ingredients' =>$ingredients
         ]);
 
     }
         /**
          * This controller create new ingrédient
-        * @param IngredientRepository $repository
         *@param EntityManagerInterface $manager
         * @param Request $request
         * @return Response
@@ -59,23 +51,21 @@ class IngredientController extends AbstractController
     {
         $ingredient = new Ingredient();
         $form = $this->createForm(IngredientType::class, $ingredient);
-
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $ingredient = $form ->getData();
-            $ingredient ->setUser($this->getUser());
+            if ($form->isSubmitted() && $form->isValid()) {
+                $ingredient = $form ->getData();
+                $ingredient ->setUser($this->getUser());
 
-        $manager->persist($ingredient);
-        $manager->flush();
-     
-        $this->addFlash(
-            'success',
-            ' Votre ingrédient a été bien crée avec succès'
-        );
+                $manager->persist($ingredient);
+                $manager->flush();
+            
+                $this->addFlash(
+                    'success',
+                    ' Votre ingrédient a été bien crée avec succès'
+                );
 
-        return $this->redirectToRoute('app_ingredient');   
-        };  
-
+                return $this->redirectToRoute('app_ingredient');   
+             };  
  
         return $this->render('pages/ingredient/new.html.twig',[
             'form'=>$form->createView()
@@ -84,7 +74,6 @@ class IngredientController extends AbstractController
     }
         /**
         * This controller edit ingrédient
-        * @param IngredientRepository $repository
         *@param EntityManagerInterface $manager
         * @param Request $request
         * @return Response
@@ -117,8 +106,8 @@ class IngredientController extends AbstractController
         
     }
 /**
-    * This controller create new recipe
-    * @param IngredientRepository $repository
+    * This controller delete ingredient
+    * @param Ingredient  $ingredient
     *@param EntityManagerInterface $manager
     * @param Request $request
     * @return Response
