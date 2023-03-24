@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sylove | Contact {% endblock %}
+
+{% block body %}
+
+
+<div class="container mt-4">
+    <h1 class ="d-flex justify-content-center mt-5">Formulaire de contact</h1>
+    {% for message in app.flashes('success') %}
+        <div class = 'alert alert-success mt-4'>
+         {{message}}
+        </div> 
+     {% endfor %}
+       {{ form(form) }}
+</div>
+{% endblock %}

@@ -133,8 +133,6 @@ class RecipeController extends AbstractController
                     return $this->redirectToRoute('app_recipe');   
                 };
 
-
-
         return $this->render('pages/recipe/new.html.twig', [
             'form'=>$form->createView()
         ]);
@@ -164,7 +162,7 @@ class RecipeController extends AbstractController
                 
                     $this->addFlash(
                         'success',
-                        ' Votre ingrédient a été bien modifié avec succès'
+                        ' Votre recette a été bien modifié avec succès'
                     );
     
                     return $this->redirectToRoute('app_recipe');   
