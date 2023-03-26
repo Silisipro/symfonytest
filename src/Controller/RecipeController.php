@@ -20,6 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class RecipeController extends AbstractController
 
+{
 /**
   * This controller display all recipes
   * @param IngredientRepository $repository
@@ -27,7 +28,7 @@ class RecipeController extends AbstractController
   * @param Request $request
   * @return Response
   */
-{
+
     #[Route('/recette', name: 'app_recipe', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
     public function index(RecipeRepository $repository, PaginatorInterface $paginator, Request $request ): Response
@@ -60,53 +61,6 @@ class RecipeController extends AbstractController
     }
 
     /**
-    * This controller show recipe  
-    * @param MarkRepository $repository
-    *@param EntityManagerInterface $manager
-    * @param Request $request
-    * @return Response
-    */
-
-    #[Security("is_granted('ROLE_USER') and recipe.isIsPublic() ===true || user===recipe.getUser()")]
-    #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET', 'POST'])]
-    public function show (Recipe $recipe, Request $request, EntityManagerInterface $manager, MarkRepository $markRepository): Response
-    
-    {
-        $mark = new Mark();
-         $form = $this->createForm(MarkType::class, $mark);
-         $form->handleRequest($request);
-                    if ($form->isSubmitted() && $form->isValid()) {
-                        $mark->setUser($this->getUser())
-                              ->setRecipe($recipe);
-                        
-                        $existingMark = $markRepository->findOneBy([
-
-                            'user' => $this->getUser(),
-                            'recipe' => $recipe
-                        ]);      
-                       if (!$existingMark){
-                        $manager ->persist($mark);
-                       }else{
-                        $existingMark-> setMark(
-                            $form ->getData()->getMark()
-                        );
-                       }
-                       $manager ->flush();
-                    $this->addFlash(
-                        'success',
-                        ' Votre note a été bien prise en compte'
-                    );
-                    return $this->redirectToRoute('recipe.show', ['id'=>$recipe->getId()]);
-                }
-        return $this->render('pages/recipe/show.html.twig',[
-            'recipe' => $recipe,
-            'form'=>$form->createView()
-
-         ]);  
-         
-    }
- 
-    /**
     * This controller create new recipe
     *@param EntityManagerInterface $manager
     * @param Request $request
@@ -114,7 +68,7 @@ class RecipeController extends AbstractController
     */
      #[Route('/recette/creation', name: 'recipe.new', methods: ['GET', 'POST'])]
      #[IsGranted('ROLE_USER')]
-    public function new(Request $request, EntityManagerInterface $manager ): Response
+    public function new (Request $request, EntityManagerInterface $manager ): Response
     {
                 $recipe = new Recipe();
                 $form = $this->createForm(RecipeType::class, $recipe);
@@ -172,6 +126,54 @@ class RecipeController extends AbstractController
                 'form'=>$form->createView()
             ]);
             
+    }
+
+    
+    /**
+    * This controller show recipe  
+    * @param MarkRepository $repository
+    *@param EntityManagerInterface $manager
+    * @param Request $request
+    * @return Response
+    */
+
+    #[Security("is_granted('ROLE_USER') and recipe.isIsPublic() ===true || user===recipe.getUser()")]
+    #[Route('/recette/{id}', name: 'recipe.show', methods: ['GET', 'POST'])]
+    public function show (Recipe $recipe, Request $request, EntityManagerInterface $manager, MarkRepository $markRepository): Response
+    
+    {
+        $mark = new Mark();
+         $form = $this->createForm(MarkType::class, $mark);
+         $form->handleRequest($request);
+                    if ($form->isSubmitted() && $form->isValid()) {
+                        $mark->setUser($this->getUser())
+                              ->setRecipe($recipe);
+                        
+                        $existingMark = $markRepository->findOneBy([
+
+                            'user' => $this->getUser(),
+                            'recipe' => $recipe
+                        ]);      
+                       if (!$existingMark){
+                        $manager ->persist($mark);
+                       }else{
+                        $existingMark-> setMark(
+                            $form ->getData()->getMark()
+                        );
+                       }
+                       $manager ->flush();
+                    $this->addFlash(
+                        'success',
+                        ' Votre note a été bien prise en compte'
+                    );
+                    return $this->redirectToRoute('recipe.show', ['id'=>$recipe->getId()]);
+                }
+        return $this->render('pages/recipe/show.html.twig',[
+            'recipe' => $recipe,
+            'form'=>$form->createView()
+
+         ]);  
+         
     }
         /**
     * This controller delete recipe

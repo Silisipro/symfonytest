@@ -21,48 +21,54 @@
        <p> <span class= " badge bg-secondary">La moyenne de cette recette est de {{recipe.average|number_format(2, ',', '.') }}/5 </span></p>
 
          
-       <p> <span class= " badge bg-primary">Créée le {{recipe.createdAt|date('d/m/Y') }} </span> par {{app.user.fullName}}</p>
-         
-         {% if recipe.time  %}
-          <p>Temps (en minute) :  {{ recipe.time }} </p>
-        {% else %}
-           <p> Temps non renseigné</p>
-         {% endif %}
-
-         {% if recipe.nbPeople  %}
-        <p>Pour {{ recipe.nbPeople }} personnes </p>
-        {% else %}
-           <p> Nombre de personnes non renseigné</p>
-         {% endif %}
-
-         {% if recipe.difficulty  %}
-        <p>Difficulté :  {{ recipe.difficulty }} /5 </p>
-        {% else %}
-           <p> Difficulté non renseigné</p>
-         {% endif %}
-
-         {% if recipe.price  %}
-        <p>Prix (en $) :  {{ recipe.price }} </p>  
-        {% else %}
-           <p>Prix non renseigné</p>
-         {% endif %}
+       <p> <span class= " badge bg-primary">Ajouter le {{recipe.createdAt|date('d/m/Y') }} </span></p>
 
         <div class = "mt-4">
-         Description : {{ recipe.description|raw }}
+          {% if recipe.time  %}
+            <p><h6>Temps (en minute) :  {{ recipe.time }} </h6> </p>
+          {% else %}
+            <p><h6> Temps non renseigné </h6> </p>
+          {% endif %}
+        </div> 
+
+        <div class = "mt-4">
+          {% if recipe.nbPeople  %}
+            <p> <h6> Pour {{ recipe.nbPeople }} personnes </h6> </p>
+          {% else %}
+            <p> <h6> Nombre de personnes non renseigné </h6> </p>
+          {% endif %}
+        </div> 
+
+        <div class = "mt-4">
+
+          {% if recipe.difficulty  %}
+          <p><h6> Difficulté :  {{ recipe.difficulty }} /5 </h6> </p>
+          {% else %}
+            <p><h6> Difficulté non renseigné </h6></p>
+          {% endif %}
+        </div> 
+
+        <div class = "mt-4">
+          {% if recipe.price  %}
+          <p><h6>Prix (en $) :  {{ recipe.price }} </h6></p>  
+          {% else %}
+            <p><h6>Prix non renseigné</h6></p>
+          {% endif %}
+        </div> 
+
+        <div class = "mt-4">
+            <h6> Description : {{ recipe.description|raw }}</h6>
         </div>
 
         <hr> 
         <div> 
-
-                <p> INGREDIENTS<p>
-            {% for ingredient in recipe.ingredients %}
-            
-            <span class= "badge bg-secondary">{{ingredient.name }} </span>
-                
+            <h6> INGREDIENTS</h6>
+            {% for ingredient in recipe.ingredients %}            
+            <span class= "badge bg-danger">{{ingredient.name }} </span>   
             {% endfor %}
         </div> 
         <div class="mark">
-         {{ form(form) }}
+             {{ form(form) }}
         </div> 
     </div> 
 {% endblock body %} 

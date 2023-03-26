@@ -13,42 +13,42 @@
        {{ form_start(form) }} 
 
         <div class="form-group">
-          {{ form_label(form.name) }}
+          <h6>{{ form_label(form.name) }}</h6>
           {{ form_widget(form.name) }}
           <div class="form-error">
             {{ form_errors(form.name) }}
           </div>
         </div>
         <div class="form-group">
-          {{ form_label(form.time) }}
+        <h6>  {{ form_label(form.time) }}</h6>
           {{ form_widget(form.time) }}
           <div class="form-error">
             {{ form_errors(form.time) }}
           </div>
         </div>
         <div class="form-group">
-          {{ form_label(form.nbPeople) }}
+        <h6>  {{ form_label(form.nbPeople) }} </h6>
           {{ form_widget(form.nbPeople) }}
           <div class="form-error">
             {{ form_errors(form.nbPeople) }}
           </div>
         </div>
         <div class="form-group">
-          {{ form_label(form.difficulty) }}
+        <h6>  {{ form_label(form.difficulty) }} </h6>
           {{ form_widget(form.difficulty) }}
           <div class="form-error">
             {{ form_errors(form.difficulty) }}
           </div>
         </div>
         <div class="form-group">
-          {{ form_label(form.description) }}
+         <h6> {{ form_label(form.description) }}</h6>
           {{ form_widget(form.description) }}
           <div class="form-error">
             {{ form_errors(form.description) }}
           </div>
         </div>
         <div class="form-group">
-          {{ form_label(form.price) }}
+       <h6>   {{ form_label(form.price) }}</h6>
           {{ form_widget(form.price) }}
           <div class="form-error">
             {{ form_errors(form.price) }}
@@ -56,16 +56,23 @@
           
         </div>
         <div class="form-group mt-4 ">
-          {{ form_label(form.isFavorite) }}
+         <h6> {{ form_label(form.isFavorite) }}</h6>
           {{ form_widget(form.isFavorite) }}
           <div class="form-error">
             {{ form_errors(form.isFavorite) }}
           </div>
         </div>
-             {{ form_row(form.imageFile) }}
+        <div class="form-group mt-4 ">
+         <h6> {{ form_label(form.isPublic) }}</h6>
+          {{ form_widget(form.isPublic) }}
+          <div class="form-error">
+            {{ form_errors(form.isPublic) }}
+          </div>
+        </div>
+           <h6>  {{ form_row(form.imageFile) }} </h6>
         
         <div class="form-group">
-          {{ form_label(form.ingredients) }}
+         <h6> {{ form_label(form.ingredients) }} </h6>
           {{ form_widget(form.ingredients) }}
           <div class="form-error">
             {{ form_errors(form.ingredients) }}

@@ -1,51 +1,59 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-  <div class="container-fluid" >
-    <a class="navbar-brand" href="{{path('home.index')}}">SILISIPRO</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{path('home.index')}}">Aceuil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{path('app_contact')}}">Nous contacter</a>
-        </li>
-        {% if app.user %}
-          <li class="nav-item">
-          <a class="nav-link" href="{{path('app_ingredient')}}">Mes Ingrédients</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_recipe')}}">Mes Recettes</a>
-        </li>
-        {% endif %}       
-      </ul>
-      <div class"d-flex">
-               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               {% if app.user %}
-                <li class="nav-item dropdown" style="margin-right : 5rem ;">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{app.user.fullName}}
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{path('app_user', {id : app.user.id})}}">Modifier mes informations</a></li>
-                    <li><a class="dropdown-item" href="{{path('app_user_edit_password', {id : app.user.id})}}">Modifier mon mot de pass</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{{path('security.logout')}}">Deconnexion</a></li>
-                  </ul>
-               </li>
-                 {% else %} 
-                <li class="nav-item">
-                  <a class="nav-link" href="{{path('app_security')}}">Connexion</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{path('security.registration')}}">Inscription</a>
-                </li>
-                {% endif %}
-                
-              </ul>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav fixed-top">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="{{asset('assets/images/logo.png')}}" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">         
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{path('home.index')}}">Aceuil</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{path('app_contact')}}">Nous contacter</a>
+                          </li>
+                          {% if app.user %}
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_ingredient')}}">Mes Ingrédients</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_recipe')}}">Mes Recettes</a>
+                          </li>
+                          {% endif %}      
+                        <div class"d-flex">
+                           <ul class="nav">
+                                {% if app.user %}
+                                <li class="nav-item dropdown" style="margin-right : 5rem ;">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{app.user.fullName}} <img src="{{asset('assets/images/profile-header.jpg')}}" alt="">
+                                  </a>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="{{path('app_user', {id : app.user.id})}}">Modifier mes informations</a></li>
+                                      <li><a class="dropdown-item" href="{{path('app_user_edit_password', {id : app.user.id})}}">Modifier mon mot de pass</a></li>
+                                      <li><hr class="dropdown-divider"></li>
+                                      <li><a class="dropdown-item" href="{{path('security.logout')}}">Deconnexion</a></li>
+                                    </ul>
+                                </li>
+                                  {% else %} 
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="{{path('app_security')}}">Connexion</a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="{{path('security.registration')}}">Inscription</a>
+                                  </li>
+                                  {% endif %}
+                            </ul> 
+                         </div>
+                      </ul> 
+                    <!-- ***** Menu End ***** -->
+                </nav>
             </div>
+        </div>
     </div>
-  </div>
-</nav>
+  </header>

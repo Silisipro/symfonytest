@@ -4,45 +4,75 @@
 
 
  {% block body %} 
-<div class="container mt-4">
-    <div class="jumbotron">
-        <h1 class="display-4 mt-5" >Bienvenu sur Sylove</h1>
-        <p class="lead">L'amour est beau , l'amour est fort. Sylove vous propose des personnes fan d'amour pour vous. </p>
-        <hr class="my-4">
-        <p>Pour commencer merci de vous inscrire afin de profiter les avantages qu'offrent Sylove.</p>
 
-        {% if app.user %}
-            <a class="btn btn-primary btn-lg" href="{{path('recipe.index.public')}}" role="button">Recettes publiques</a>
-        <a class="btn btn-primary btn-lg" href="{{path('ingredient.new')}}" role="button">Créer un ingredient</a>
-        <a class="btn btn-primary btn-lg" href="{{path('recipe.new')}}" role="button">Créer une recette</a>
-        
-        {% else %}
-        <a class="btn btn-primary btn-lg" href="{{path('security.registration')}}" role="button">Inscription</a>
 
-        {% endif %}
-        
-    </div>
-    
-    <div class= >
-        <h2 class="mt-4">Reccettes de la conmunauté </h2>
-        <div class="d-flex justify-content-between"> 
-            {% for recipe in recipes %}
-            <div class="card">
-                <div class="card-header" style="max-width:20rem;">
-                    <div class="card-header">
-                           <h5 class="card-title"> Recette n° {{recipe.id}} </h5>
-                         <hr>    
-                        <div class="card-body">
-                            <h4 class="card-title"> {{recipe.name}} </h4>
-                            <p class="card-text">{{recipe.description|slice(0, 100)}}... </p>
-                            <a class="card-link" href="{{path('recipe.show', {id: recipe.id})}}">Plus de details</a>
-                        </div>      
-                    </div>      
-                </div>    
-            </div>    
-            {% endfor %}
+
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-12">
+                <div class="page-content">
+                <!-- ***** Banner Start ***** -->
+                <div class="main-banner">
+                    <div class="row">
+                    <div class="col-lg-12">                       
+                        <div class="header-text">
+                           {% if app.user %}
+                        <h6>Une plateforme de receuille de recettes pour vous aider dans votre vie spirituelle.</h6>
+                        <h6>Une plateforme de receuille de recettes pour vous aider dans votre vie spirituelle.</h6>
+                        <h6>Une plateforme de receuille de recettes pour vous aider dans votre vie spirituelle.</h6>
+                               {% else %}
+                         <h4>BIENVENUE SUR <em>BenRec</em> </h4>
+                        <h6>Une plateforme de receuille de recettes pour vous aider dans votre vie spirituelle.</h6>
+                        <div class="main-button">
+                        <h6 class"">Pour en beneficier merci de vous inscrire 
+                         <a class="btn btn-primary btn-lg" href="{{path('security.registration')}}" role="button">Inscription</a>
+                        </h6>
+                           {% endif %}
+
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+                <!-- ***** Banner End ***** -->
+
+    <div class="container mt-4">
+        
+            <div class="d-flex justify-content-center mt-5">
+                <hr class="my-4">
+
+                {% if app.user %}
+                    <a class="btn btn-danger btn-lg" href="{{path('recipe.index.public')}}" role="button">Recettes publiques</a>
+                <a class="btn btn-danger btn-lg" href="{{path('ingredient.new')}}" role="button">Créer un ingredient</a>
+                <a class="btn btn-danger btn-lg" href="{{path('recipe.new')}}" role="button">Créer une recette</a>
+
+                {% endif %}
+            </div>
+        
+        <div class= "container mt-4">
+            <h2 class="d-flex justify-content-center mb-5">Reccettes de la conmunauté </h2>
+            <div class="d-flex justify-content-between"> 
+                {% for recipe in recipes %}
+                <div class="card">
+                    <div class="card-header" style="max-width:20rem;">
+                        <div class="card-header">
+                            <h5 class="card-title"> Recette n° {{recipe.id}} </h5>
+                            <hr>    
+                            <div class="card-body">
+                                <h4 class="card-title"> {{recipe.name}} </h4>
+                                <p class="card-text">{{recipe.description|slice(0, 100)}}... </p>
+                                <a class="card-link" href="{{path('recipe.show', {id: recipe.id})}}">Plus de details</a>
+                            </div>      
+                        </div>      
+                    </div>    
+                </div>    
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 <hr> <hr> <hr> 
  {% endblock %}

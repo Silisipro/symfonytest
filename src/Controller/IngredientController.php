@@ -126,8 +126,11 @@ class IngredientController extends AbstractController
         return $this->redirectToRoute('app_ingredient');   
     }  
     
-    
-    
+    #[Route('/ingredient/sylove', name:'sylove', methods:['GET', 'POST'])]
+    public function essaie(): Response 
+    {
+        return $this->render('pages/ingredient/sylove.html.twig');
+    }
 
 
 

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      {% block title %}Sylove - BenRec {% endblock %}
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+            rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+            <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+            <!-- font-awesome css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/fontawesome.css') }}">
+            <!-- animate css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
+            <!-- slick css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/owl.css') }}">
+            <!-- off canvas css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/off-canvas.css') }}">
+            <!-- linea-font css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/linea-fonts.css') }}">
+            <!-- flaticon css  -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/flaticon.css') }}">
+            <!-- magnific popup css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/templatemo-cyborg-gaming.css') }}">
+            <!-- Main Menu css -->
+            <link rel="stylesheet" href="{{ asset('assets/css/rsmenu-main.css') }}">
+            <!-- nivo slider CSS -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/inc/custom-slider/css/nivo-slider.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/inc/custom-slider/css/preview.css') }}">
+            <!-- rsmenu transitions css -->
+            <link rel="stylesheet" href="{{ asset('assets/css/rsmenu-transitions.css') }}">
+            <!-- spacing css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/rs-spacing.css') }}">
+            <!-- rs animations css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/rs-animations.css') }}">
+            <!-- select2 css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
+            <!-- zoombox css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/zoombox/zoombox.css') }}">
+            <!-- flatpicker css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/flatpickr.min.css') }}">
+            <!-- style css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+            <!-- responsive css -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
+            <!-- CustomElement-DropFiles -->
+        
+        {% endblock %}
+  </head>
+
+
+<body>
+{% block header %}
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav fixed-top">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="{{asset('assets/images/logo.png')}}" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">         
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{path('home.index')}}">Aceuil</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{path('app_contact')}}">Nous contacter</a>
+                          </li>
+                          {% if app.user %}
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_ingredient')}}">Mes Ingrédients</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_recipe')}}">Mes Recettes</a>
+                          </li>
+                          {% endif %}      
+                        <div class"d-flex">
+                           <ul class="nav">
+                                {% if app.user %}
+                                <li class="nav-item dropdown" style="margin-right : 5rem ;">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{app.user.fullName}} <img src="{{asset('assets/images/profile-header.jpg')}}" alt="">
+                                  </a>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="{{path('app_user', {id : app.user.id})}}">Modifier mes informations</a></li>
+                                      <li><a class="dropdown-item" href="{{path('app_user_edit_password', {id : app.user.id})}}">Modifier mon mot de pass</a></li>
+                                      <li><hr class="dropdown-divider"></li>
+                                      <li><a class="dropdown-item" href="{{path('security.logout')}}">Deconnexion</a></li>
+                                    </ul>
+                                </li>
+                                  {% else %} 
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="{{path('app_security')}}">Connexion</a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="{{path('security.registration')}}">Inscription</a>
+                                  </li>
+                                  {% endif %}
+                            </ul> 
+                         </div>
+                      </ul> 
+                  
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+        {% endblock %}
+
+
+        {% block body %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Banner Start ***** -->
+          <div class="main-banner">
+            <div class="row">
+              <div class="col-lg-7">
+                <div class="header-text">
+                  <h4>BIENVENUE SUR<em>BenRec</em> </h4>
+                  
+                  <div class="main-button">
+                    <a href="browse.html">Browse Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Banner End ***** -->
+
+          <!-- ***** Most Popular Start ***** -->
+          <div class="most-popular">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em>Most Popular</em> Right Now</h4>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="{{asset('assets/images/popular-01.jpg')}}" alt="">
+                      <h4>Fortnite<br><span>Sandbox</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="{{asset('assets/images/popular-02.jpg')}}" alt="">
+                      <h4>PubG<br><span>Battle S</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="{{asset('assets/images/popular-03.jpg')}}" alt="">
+                      <h4>Dota2<br><span>Steam-X</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="{{asset('assets/images/popular-04.jpg')}}" alt="">
+                      <h4>CS-GO<br><span>Legendary</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                          <div class="item inner-item">
+                      <img src="{{asset('assets/images/popular-05.jpg')}}" alt="">
+                            <h4>Mini Craft<br><span>Legendary</span></h4>
+                            <ul>
+                              <li><i class="fa fa-star"></i> 4.8</li>
+                              <li><i class="fa fa-download"></i> 2.3M</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                          <div class="item">
+                      <img src="{{asset('assets/images/popular-06.jpg')}}" alt="">
+                            
+                            <h4>Eagles Fly<br><span>Matrix Games</span></h4>
+                            <ul>
+                              <li><i class="fa fa-star"></i> 4.8</li>
+                              <li><i class="fa fa-download"></i> 2.3M</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="{{asset('assets/images/popular-07.jpg')}}" alt="">
+                      <h4>Warface<br><span>Max 3D</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="{{asset('assets/images/popular-08.jpg')}}" alt="">
+                      
+                      <h4>Warcraft<br><span>Legend</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="main-button">
+                      <a href="browse.html">Discover Popular</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Most Popular End ***** -->
+
+          <!-- ***** Gaming Library Start ***** -->
+          <div class="gaming-library">
+            <div class="col-lg-12">
+              <div class="heading-section">
+                <h4><em>Your Gaming</em> Library</h4>
+              </div>
+              <div class="item">
+                <ul>
+                  <li><img src="{{asset('assets/images/game-01.jpg')}}" alt="" class="templatemo-item"></li>
+                  <li><h4>Dota 2</h4><span>Sandbox</span></li>
+                  <li><h4>Date Added</h4><span>24/08/2036</span></li>
+                  <li><h4>Hours Played</h4><span>634 H 22 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
+                </ul>
+              </div>
+              <div class="item">
+                <ul>
+                  <li><img src="{{asset('assets/images/game-02.jpg')}}" alt="" class="templatemo-item"></li>
+                  <li><h4>Fortnite</h4><span>Sandbox</span></li>
+                  <li><h4>Date Added</h4><span>22/06/2036</span></li>
+                  <li><h4>Hours Played</h4><span>740 H 52 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button"><a href="#">Donwload</a></div></li>
+                </ul>
+              </div>
+              <div class="item last-item">
+                <ul>
+                  <li><img src="{{asset('assets/images/game-03.jpg')}}" alt="" class="templatemo-item"></li>
+                  <li><h4>CS-GO</h4><span>Sandbox</span></li>
+                  <li><h4>Date Added</h4><span>21/04/2036</span></li>
+                  <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="main-button">
+                <a href="profile.html">View Your Library</a>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Gaming Library End ***** -->
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock  %}
+
+
+{% block footer %}
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved. 
+          
+          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>  Distributed By <a href="https://themewagon.com" target="_blank" >ThemeWagon</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+{% endblock  %}
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  
+         {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+         
+            <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+            <script src="{{asset('assets/js/isotope.min.js')}}"></script>
+            <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
+            <script src="{{asset('assets/js/tabs.js')}}"></script>
+            <script src="{{asset('assets/js/popup.js')}}"></script>
+            <script src="{{asset('assets/js/custom.js')}}"></script>
+        {% endblock %}
+
+
+
+  </body>
+
+</html>

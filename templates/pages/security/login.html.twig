@@ -19,12 +19,12 @@
     {% endfor %}
     <form action="{{path('app_security')}}" method="post">
         <div class="form-group">
-            <label for ="username" class ="form-label mt-4">Adresse email </label>
+            <label for ="username" class ="form-label mt-4"> <h6>Adresse email</h6> </label>
             <input type="email" class="form-control" id="username" value="{{Last_username}}"
             name="_username" placeholder="example@sylove.com">
         </div>
         <div class="form-group">
-            <label for ="password" class ="form-label mt-4">Mot de passe</label>
+            <label for ="password" class ="form-label mt-4"><h6>Mot de passe </h6></label>
             <input type="password" class="form-control" id="password"
             name="_password" placeholder="Votre mot de passe">
         </div>

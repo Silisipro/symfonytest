@@ -5,13 +5,48 @@
 {% block body %}
 
 
-<div class="container mt-4">
-    <h1 class ="d-flex justify-content-center mt-5">Formulaire de contact</h1>
-    {% for message in app.flashes('success') %}
-        <div class = 'alert alert-success mt-4'>
-         {{message}}
-        </div> 
-     {% endfor %}
-       {{ form(form) }}
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                 <div class="page-content">
+                        <!-- ***** Featured Start ***** -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="feature-banner header-text">
+                                <div class="row">                                        
+                                        <div class="col-lg-12">
+                                            <div class="thumb">
+                                            <img src="assets/images/feature-right.jpg" alt="" style="border-radius: 23px;">
+                                            </div>
+                                        </div>
+                                   </div>
+                               </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+      </div>
+<!-- ***** Featured End ***** -->
+  <div class="container mt-5">
+    <div class"container">
+      <div class"row mt-4">
+          <div class"row mb-4">
+          <span></span>
+          <span></span>
+          <span></span>
+            <h1 class ="d-flex justify-content-center mt-5">Formulaire de contact</h1>
+            {% for message in app.flashes('success') %}
+                <div class = 'alert alert-success mt-4'>
+                {{message}}
+                </div> 
+            {% endfor %}
+
+              <h6> {{ form(form) }}</6>
+        </div>
+      </div>
+    </div>
+
+  </div>
 {% endblock %}

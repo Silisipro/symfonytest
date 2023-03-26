@@ -138,6 +138,14 @@ public function __construct( TokenStorageInterface  $token)
                     new Assert\NotNull(), 
                     ]    
             ] )
+            ->add('isPublic', CheckboxType::class,  [
+                
+                'label'=> 'Rend ça publique?',
+                'required' =>true,
+                'constraints'=>[ 
+                    new Assert\NotNull(), 
+                    ]    
+            ] )
            // ->add('imageFile', VichimageType::class,  [
                 
            //     'label'=> 'Image de la recette',
