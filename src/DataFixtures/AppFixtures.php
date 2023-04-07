@@ -38,16 +38,12 @@ class AppFixtures extends Fixture
 
             $users[] = $user;  
             $manager->persist($user);    
-
-
         }
-
-
-        
+ 
         //Ingredient
          $ingredients = [];
         for ($i=0; $i <50 ; $i++) { 
-            $ingredient = new Ingredient();
+        $ingredient = new Ingredient();
         $ingredient->setName($this->faker->word())
              ->setPrice(mt_rand(0,100))
              ->setUser($users[mt_rand(0, count($users) - 1)]);         
