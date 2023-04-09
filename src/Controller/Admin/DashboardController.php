@@ -19,7 +19,7 @@ class DashboardController extends AbstractDashboardController
     {
         
         
-         return $this->render('bundles\EasyAdminBundles\views\layout.html.twig');
+         return $this->render('admin/my-dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
