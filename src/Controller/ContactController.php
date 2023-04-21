@@ -19,7 +19,7 @@ class ContactController extends AbstractController
 
        //if($this->getUser()){
       //  $contact->setFullName($this->getUser()->getFullName())
-      //  ->setEmail($this->getUser()->getEmail());
+      //         ->setEmail($this->getUser()->getEmail());
       // }
 
         $form = $this->createForm(ContactType::class, $contact);

@@ -1,16 +1,5 @@
 
-    <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
-  <!-- ***** Preloader End ***** -->
+    
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
     <div class="container">
@@ -25,10 +14,10 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">         
                           <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{path('home.index')}}">Aceuil</a>
+                            <a class="nav-link active" href="{{path('home.index')}}">Aceuil</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{path('app_contact')}}">Nous contacter</a>
+                            <a class="nav-link" href="{{path('app_contact')}}">Nous contacter</a>
                           </li>
                           {% if app.user %}
                             <li class="nav-item">
